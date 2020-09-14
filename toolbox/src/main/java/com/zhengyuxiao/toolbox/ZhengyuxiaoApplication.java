@@ -1,4 +1,4 @@
-package com.toolbox.zhengyuxiao;
+package com.zhengyuxiao.toolbox;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
