@@ -117,6 +117,16 @@ public class PageFactory {
         }
     }
 
+    public static Sort getSort(String direction, String defaultDirection, String columnName) {
+        if (ASCENDING_UP.equals(direction) || ASCENDING_DOWN.equals(direction)) {
+            return new Sort(Sort.Direction.ASC, columnName);
+        } else if (DESCENDING_UP.equals(direction) || DESCENDING_DOWN.equals(direction)) {
+            return new Sort(Sort.Direction.DESC, columnName);
+        } else {
+            return new Sort(Sort.Direction.ASC, columnName);
+        }
+    }
+
     public static Sort getSort(String direction, List<String> columnNameList) {
         if (columnNameList == null || columnNameList.size() == 0) {
             throw new IllegalArgumentException("未指定排序字段");

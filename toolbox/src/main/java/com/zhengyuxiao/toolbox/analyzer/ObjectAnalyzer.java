@@ -1,4 +1,4 @@
-package com.zhengyuxiao.toolbox.reflection;
+package com.zhengyuxiao.toolbox.analyzer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

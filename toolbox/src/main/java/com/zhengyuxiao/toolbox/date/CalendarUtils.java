@@ -54,33 +54,6 @@ public class CalendarUtils {
     }
 
     /**
-     * Get the number of days between two dates.
-     *
-     * @param startDate - the start date
-     * @param endDate   - the end date
-     * @return the number of days between two dates.
-     */
-    public static long getDaysOfDifference(Date startDate, Date endDate) {
-
-        // 1.convert Date instance to Calendar instance
-        Calendar startCalendar = Calendar.getInstance();
-        Calendar endCalendar = Calendar.getInstance();
-        startCalendar.setTime(startDate);
-        endCalendar.setTime(endDate);
-
-        // 2.get the number of milliseconds corresponding to the date（statistics from 1900）
-        long millisForStartDate = startCalendar.getTimeInMillis();
-        long millisForEndDate = endCalendar.getTimeInMillis();
-
-        // 3.get the number of days corresponding to the date（statistics from 1900）
-        long daysForStartDate = millisForStartDate / 1000 / 3600 / 24;
-        long daysForEndDate = millisForEndDate / 1000 / 3600 / 24;
-
-        // 4.get the number of days between two dates
-        return daysForEndDate - daysForStartDate;
-    }
-
-    /**
      * Returns whether the two dates are the same day.
      *
      * @param date1 the date 1
@@ -88,6 +61,23 @@ public class CalendarUtils {
      * @return whether the two dates are the same day.
      */
     public static boolean isTheSameDay(Date date1, Date date2) {
-        return 0 == getDaysOfDifference(date1, date2);
+        if (date1 == null || date2 == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date1);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+        return isSameDay(cal1, cal2);
+    }
+
+    public static boolean isSameDay(Calendar cal1, Calendar cal2) {
+        if (cal1 == null || cal2 == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+
+        return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
+                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
     }
 }
