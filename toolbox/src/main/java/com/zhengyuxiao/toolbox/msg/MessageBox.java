@@ -51,8 +51,8 @@ public class MessageBox<T> extends Message {
         return "{\n" +
                 "    \"status\": " + status + ",\n" +
                 "    \"ok\": " + ok + ",\n" +
-                "    \"message: \"" + message + ",\n" +
-                "    \"data: \"" + data.toString() + "\n" +
+                "    \"message\": " + message + ",\n" +
+                "    \"data\": " + data.toString() + "\n" +
                 "}\n";
     }
 }

@@ -97,7 +97,7 @@ public class Message {
         return "\n{" +
                 "    \"status\": " + status + ",\n" +
                 "    \"ok\": " + ok + ",\n" +
-                "    \"message: \"" + message + "\n" +
+                "    \"message\": " + message + "\n" +
                 "}\n";
     }
 }
