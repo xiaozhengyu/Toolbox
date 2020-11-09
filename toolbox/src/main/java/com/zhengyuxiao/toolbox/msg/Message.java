@@ -20,9 +20,9 @@ public class Message {
     public static final boolean BOOLEAN_OK = true;
     public static final boolean BOOLEAN_FAIL = false;
 
-    private int status;
-    private String message;
-    private boolean ok;
+    protected int status;
+    protected String message;
+    protected boolean ok;
 
     public Message() {
         this.status = STATUS_OK;
@@ -90,5 +90,14 @@ public class Message {
      */
     public static Message fail() {
         return new Message(STATUS_FAIL, MESSAGE_FAIL, BOOLEAN_FAIL);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "    \"status\": " + status + ",\n" +
+                "    \"ok\": " + ok + ",\n" +
+                "    \"message: \"" + message + "\n" +
+                "}";
     }
 }

@@ -45,4 +45,14 @@ public class MessageBox<T> extends Message {
     public static <E> MessageBox<E> fail(E data) {
         return new MessageBox<>(Message.BOOLEAN_FAIL, data);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "    \"status\": " + status + ",\n" +
+                "    \"ok\": " + ok + ",\n" +
+                "    \"message: \"" + message + ",\n" +
+                "    \"data: \"" + data.toString() + "\n" +
+                "}";
+    }
 }
