@@ -48,11 +48,11 @@ public class MessageBox<T> extends Message {
 
     @Override
     public String toString() {
-        return "{" +
+        return "{\n" +
                 "    \"status\": " + status + ",\n" +
                 "    \"ok\": " + ok + ",\n" +
                 "    \"message: \"" + message + ",\n" +
                 "    \"data: \"" + data.toString() + "\n" +
-                "}";
+                "}\n";
     }
 }

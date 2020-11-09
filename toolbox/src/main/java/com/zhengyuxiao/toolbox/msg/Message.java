@@ -94,10 +94,10 @@ public class Message {
 
     @Override
     public String toString() {
-        return "{" +
+        return "\n{" +
                 "    \"status\": " + status + ",\n" +
                 "    \"ok\": " + ok + ",\n" +
                 "    \"message: \"" + message + "\n" +
-                "}";
+                "}\n";
     }
 }
