@@ -30,6 +30,9 @@ public class PageFactory {
     public static final String DESCENDING_UP = "DESC";
     public static final String DESCENDING_DOWN = "desc";
 
+    private PageFactory() {
+    }
+
     /**
      * @param pageNumber - 页码
      * @param pageSize   - 页数据量
@@ -141,6 +144,21 @@ public class PageFactory {
         for (Sort sort : sortList) {
             if (sort != null) {
                 finalSort = finalSort != null ? finalSort.and(sort) : sort;
+            }
+        }
+        return finalSort;
+    }
+
+    public static Sort getSort(String direction, String... columnNames) {
+        if (columnNames == null || columnNames.length == 0) {
+            throw new IllegalArgumentException("未指定排序字段");
+        }
+
+        Sort finalSort = null;
+        for (String columnName : columnNames) {
+            Sort newSort = getSort(direction, columnName);
+            if (newSort != null) {
+                finalSort = finalSort != null ? finalSort.and(newSort) : newSort;
             }
         }
         return finalSort;
