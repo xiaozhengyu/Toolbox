@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -116,50 +115,32 @@ public class PageFactory {
         } else if (DESCENDING_UP.equals(direction) || DESCENDING_DOWN.equals(direction)) {
             return new Sort(Sort.Direction.DESC, columnName);
         } else {
-            return null;
-        }
-    }
-
-    public static Sort getSort(String direction, String defaultDirection, String columnName) {
-        if (ASCENDING_UP.equals(direction) || ASCENDING_DOWN.equals(direction)) {
-            return new Sort(Sort.Direction.ASC, columnName);
-        } else if (DESCENDING_UP.equals(direction) || DESCENDING_DOWN.equals(direction)) {
-            return new Sort(Sort.Direction.DESC, columnName);
-        } else {
-            return new Sort(Sort.Direction.ASC, columnName);
+            throw new IllegalArgumentException("Please check the sort direction！");
         }
     }
 
     public static Sort getSort(String direction, List<String> columnNameList) {
-        if (columnNameList == null || columnNameList.size() == 0) {
-            throw new IllegalArgumentException("未指定排序字段");
-        }
-
-        List<Sort> sortList = new LinkedList<>();
-        for (String columnName : columnNameList) {
-            sortList.add(getSort(direction, columnName));
+        if (columnNameList == null || columnNameList.isEmpty()) {
+            throw new IllegalArgumentException("Please specify the sort columns！");
         }
 
         Sort finalSort = null;
-        for (Sort sort : sortList) {
-            if (sort != null) {
-                finalSort = finalSort != null ? finalSort.and(sort) : sort;
-            }
+        for (String columnName : columnNameList) {
+            Sort otherSort = getSort(direction, columnName);
+            finalSort = finalSort != null ? finalSort.and(otherSort) : otherSort;
         }
         return finalSort;
     }
 
     public static Sort getSort(String direction, String... columnNames) {
         if (columnNames == null || columnNames.length == 0) {
-            throw new IllegalArgumentException("未指定排序字段");
+            throw new IllegalArgumentException("Please specify the sort columns！");
         }
 
         Sort finalSort = null;
         for (String columnName : columnNames) {
-            Sort newSort = getSort(direction, columnName);
-            if (newSort != null) {
-                finalSort = finalSort != null ? finalSort.and(newSort) : newSort;
-            }
+            Sort otherSort = getSort(direction, columnName);
+            finalSort = finalSort != null ? finalSort.and(otherSort) : otherSort;
         }
         return finalSort;
     }
