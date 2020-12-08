@@ -62,7 +62,7 @@ public class CalendarUtils {
      */
     public static long getDaysOfDifference(Date date1, Date date2) {
         if (date1 == null || date2 == null) {
-            throw new IllegalArgumentException("The date must not be null");
+            throw new NullPointerException();
         }
         Calendar cal1 = Calendar.getInstance();
         cal1.setTime(date1);
@@ -80,7 +80,7 @@ public class CalendarUtils {
      */
     public static long getDaysOfDifference(Calendar cal1, Calendar cal2) {
         if (cal1 == null || cal2 == null) {
-            throw new IllegalArgumentException("The date must not be null");
+            throw new NullPointerException();
         }
         cleanTime(cal1);
         cleanTime(cal2);
@@ -99,7 +99,7 @@ public class CalendarUtils {
      */
     public static boolean isSameDay(Date date1, Date date2) {
         if (date1 == null || date2 == null) {
-            throw new IllegalArgumentException("The date must not be null");
+            throw new NullPointerException();
         }
         Calendar cal1 = Calendar.getInstance();
         cal1.setTime(date1);
@@ -117,7 +117,7 @@ public class CalendarUtils {
      */
     public static boolean isSameDay(Calendar cal1, Calendar cal2) {
         if (cal1 == null || cal2 == null) {
-            throw new IllegalArgumentException("The date must not be null");
+            throw new NullPointerException();
         }
 
         return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
@@ -129,9 +129,8 @@ public class CalendarUtils {
      * 清洗时间——将时、分、秒、毫秒清零
      *
      * @param calendar - 待处理的日期
-     * @return - 时、分、秒、毫秒被清零的日期
      */
-    public static Calendar cleanTime(Calendar calendar) {
+    public static void cleanTime(Calendar calendar) {
         if (calendar == null) {
             throw new IllegalArgumentException("The date must not be null");
         }
@@ -139,7 +138,6 @@ public class CalendarUtils {
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        return calendar;
     }
 
     /**
@@ -156,17 +154,5 @@ public class CalendarUtils {
         calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.DAY_OF_MONTH, 0);
         return calendar;
-    }
-
-    public static void main(String[] args) throws Exception {
-        // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        // Date date1 = simpleDateFormat.parse("2020-01-01 23:59:59");
-        // Date date2 = simpleDateFormat.parse("2020-01-01 00:00:00");
-        // Date date3 = simpleDateFormat.parse("2020-01-02 00:00:00");
-
-        // System.out.println(getDaysOfDifference(date1, date2));
-        // System.out.println(getDaysOfDifference(date1, date3));
-        // System.out.println(getDaysOfDifference(date2, date3));
-
     }
 }

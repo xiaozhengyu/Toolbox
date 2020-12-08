@@ -111,9 +111,9 @@ public class PageFactory {
      */
     public static Sort getSort(String direction, String columnName) {
         if (ASCENDING_UP.equals(direction) || ASCENDING_DOWN.equals(direction)) {
-            return new Sort(Sort.Direction.ASC, columnName);
+            return Sort.by(Sort.Direction.ASC, columnName);
         } else if (DESCENDING_UP.equals(direction) || DESCENDING_DOWN.equals(direction)) {
-            return new Sort(Sort.Direction.DESC, columnName);
+            return Sort.by(Sort.Direction.DESC, columnName);
         } else {
             throw new IllegalArgumentException("Please check the sort direction！");
         }

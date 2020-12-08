@@ -8,7 +8,8 @@ package com.zhengyuxiao.toolbox.test;
 public class Assert {
 
     public static void noException(TestCodeBlock testCodeBlock) {
-        assert test(testCodeBlock);
+        boolean testResult = test(testCodeBlock);
+        assert testResult;
     }
 
     private static boolean test(TestCodeBlock testCodeBlock) {

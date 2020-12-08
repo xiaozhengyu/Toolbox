@@ -40,7 +40,4 @@ public class DateFormat {
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTime();
     }
-
-    public static void main(String[] args) {
-    }
 }

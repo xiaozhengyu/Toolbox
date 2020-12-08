@@ -7,7 +7,6 @@ import lombok.Data;
  * @date 2020-10-26 09:59
  * 说明：{ "status":xxx,"message":"xxx","ok":xxx}
  */
-
 @Data
 public class Message {
 
@@ -27,7 +26,7 @@ public class Message {
     public Message() {
         this.status = STATUS_OK;
         this.message = MESSAGE_OK;
-        this.ok = BOOLEAN_FAIL;
+        this.ok = BOOLEAN_OK;
     }
 
     public Message(int status, String message, boolean ok) {
