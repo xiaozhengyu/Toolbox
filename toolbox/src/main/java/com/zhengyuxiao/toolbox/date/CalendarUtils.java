@@ -155,4 +155,7 @@ public class CalendarUtils {
         calendar.set(Calendar.DAY_OF_MONTH, 0);
         return calendar;
     }
+
+    private CalendarUtils() {
+    }
 }
