@@ -64,11 +64,7 @@ public class CalendarUtils {
         if (date1 == null || date2 == null) {
             throw new NullPointerException();
         }
-        Calendar cal1 = Calendar.getInstance();
-        cal1.setTime(date1);
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(date2);
-        return getDaysOfDifference(cal1, cal2);
+        return getDaysOfDifference(date2Calendar(date1), date2Calendar(date2));
     }
 
     /**
@@ -85,6 +81,7 @@ public class CalendarUtils {
         cleanTime(cal1);
         cleanTime(cal2);
 
+        // 1天 = 24小时 = 24*3600秒 = 24*3600*1000毫秒
         long dayOfDifference = (cal1.getTimeInMillis() - cal2.getTimeInMillis()) / (1000 * 3600 * 24);
         dayOfDifference = dayOfDifference < 0 ? -dayOfDifference : dayOfDifference;
         return dayOfDifference;
@@ -101,11 +98,7 @@ public class CalendarUtils {
         if (date1 == null || date2 == null) {
             throw new NullPointerException();
         }
-        Calendar cal1 = Calendar.getInstance();
-        cal1.setTime(date1);
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(date2);
-        return isSameDay(cal1, cal2);
+        return isSameDay(date2Calendar(date1), date2Calendar(date2));
     }
 
     /**
