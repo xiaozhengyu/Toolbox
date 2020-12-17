@@ -150,16 +150,14 @@ public class CalendarUtils {
      * 清除日期——将年、月、日清零
      *
      * @param calendar - 待处理的日期
-     * @return - 年、月、日被清零的日期
      */
-    public static Calendar cleanDate(Calendar calendar) {
+    public static void cleanDate(Calendar calendar) {
         if (calendar == null) {
             throw new IllegalArgumentException("The date must not be null");
         }
         calendar.set(Calendar.YEAR, 0);
         calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.DAY_OF_MONTH, 0);
-        return calendar;
     }
 
     public static Date cleanDate(Date date) {
