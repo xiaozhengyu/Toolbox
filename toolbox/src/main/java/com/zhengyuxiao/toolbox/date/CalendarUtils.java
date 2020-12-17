@@ -202,6 +202,24 @@ public class CalendarUtils {
         return calendar2Date(calendar);
     }
 
+    /**
+     * 按照日期的计算规则，将指定日期的指定字段加上或减去指定的量。
+     *
+     * @param date   - 待修改的日期
+     * @param field  - 待修改的日期字段（具体取值需要查询Calendar接口）
+     * @param amount - 修改量
+     * @return - 修改后的日期
+     */
+    public static Date add(Date date, int field, int amount) {
+        if (date == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+
+        Calendar calendar = date2Calendar(date);
+        calendar.add(field, amount);
+        return calendar2Date(calendar);
+    }
+
     private CalendarUtils() {
     }
 }
