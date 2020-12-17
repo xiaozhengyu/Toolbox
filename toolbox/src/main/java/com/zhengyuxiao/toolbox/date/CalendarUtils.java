@@ -140,8 +140,14 @@ public class CalendarUtils {
         calendar.set(Calendar.MILLISECOND, 0);
     }
 
+    public static Date cleanTime(Date date) {
+        Calendar calendar = date2Calendar(date);
+        cleanTime(calendar);
+        return calendar2Date(calendar);
+    }
+
     /**
-     * 清晰日期——将年、月、日清零
+     * 清除日期——将年、月、日清零
      *
      * @param calendar - 待处理的日期
      * @return - 年、月、日被清零的日期
@@ -154,6 +160,48 @@ public class CalendarUtils {
         calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.DAY_OF_MONTH, 0);
         return calendar;
+    }
+
+    public static Date cleanDate(Date date) {
+        Calendar calendar = date2Calendar(date);
+        cleanDate(calendar);
+        return calendar2Date(calendar);
+    }
+
+    /**
+     * 获取指定日期的“最初时刻”，即“yyyy-MM-dd 00:00:00:000”
+     *
+     * @param calendar - 待处理的日期
+     */
+    public static void firstMoment(Calendar calendar) {
+        cleanTime(calendar);
+    }
+
+    public static Date firstMoment(Date date) {
+        Calendar calendar = date2Calendar(date);
+        firstMoment(calendar);
+        return calendar2Date(calendar);
+    }
+
+    /**
+     * 获取指定日期的“最终时刻”，即“yyyy-MM-dd 23:59:59:999”
+     *
+     * @param calendar - 待处理的日期
+     */
+    public static void lastMoment(Calendar calendar) {
+        if (calendar == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+    }
+
+    public static Date lastMoment(Date date) {
+        Calendar calendar = date2Calendar(date);
+        lastMoment(calendar);
+        return calendar2Date(calendar);
     }
 
     private CalendarUtils() {
