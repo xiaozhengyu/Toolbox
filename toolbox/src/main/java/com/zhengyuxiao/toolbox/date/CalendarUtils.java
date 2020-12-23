@@ -1,7 +1,6 @@
 package com.zhengyuxiao.toolbox.date;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @author xzy
@@ -51,6 +50,60 @@ public class CalendarUtils {
     public static int getDayOfYear(Date date) {
         Calendar calendar = date2Calendar(date);
         return calendar.get(Calendar.DAY_OF_YEAR);
+    }
+
+    /**
+     * Get number of the days for specified month.
+     *
+     * @param date -
+     * @return - number of the days for specified month。
+     */
+    public static int getNumberOfTheDaysForSpecifiedMonth(Date date) {
+        Calendar calendar = date2Calendar(date);
+        return getNumberOfTheDaysForSpecifiedMonth(calendar);
+    }
+
+    /**
+     * Get number of the days for specified month.
+     *
+     * @param calendar -
+     * @return - number of the days for specified month。
+     */
+    public static int getNumberOfTheDaysForSpecifiedMonth(Calendar calendar) {
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+    }
+
+    /**
+     * Get Number Of The Days For Specified Month Exclude Weekend.
+     *
+     * @param calendar -
+     * @return - The Days For Specified Month Exclude Weekend.
+     */
+    public static int getNumberOfTheDaysForSpecifiedMonthExcludeWeekend(Calendar calendar) {
+        int numberOfTheDaysForSpecifiedMonthExcludeWeekend = 0;
+
+        firstDayForSpecifiedMonth(calendar);
+        int numberOfTheDaysForSpecifiedMonth = getNumberOfTheDaysForSpecifiedMonth(calendar);
+        for (int i = 0; i < numberOfTheDaysForSpecifiedMonth; i++) {
+            if (!isWeekend(calendar)) {
+                numberOfTheDaysForSpecifiedMonthExcludeWeekend++;
+            }
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        return numberOfTheDaysForSpecifiedMonthExcludeWeekend;
+    }
+
+    /**
+     * Get Number Of The Days For Specified Month Exclude Weekend.
+     *
+     * @param date -
+     * @return - The Days For Specified Month Exclude Weekend.
+     */
+    public static int getNumberOfTheDaysForSpecifiedMonthExcludeWeekend(Date date) {
+
+        Calendar calendar = date2Calendar(date);
+        return getNumberOfTheDaysForSpecifiedMonthExcludeWeekend(calendar);
     }
 
     /**
@@ -119,6 +172,28 @@ public class CalendarUtils {
     }
 
     /**
+     * Returns whether the specified date is weekend.
+     *
+     * @param date -
+     * @return - true or false
+     */
+    public static boolean isWeekend(Date date) {
+        Calendar calendar = date2Calendar(date);
+        return isWeekend(calendar);
+    }
+
+    /**
+     * Returns whether the specified date is weekend.
+     *
+     * @param calendar -
+     * @return - true or false
+     */
+    public static boolean isWeekend(Calendar calendar) {
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return dayOfWeek == Calendar.SUNDAY || dayOfWeek == Calendar.SATURDAY;
+    }
+
+    /**
      * 清洗时间——将时、分、秒、毫秒清零
      *
      * @param calendar - 待处理的日期
@@ -131,6 +206,7 @@ public class CalendarUtils {
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
+        calendar.getTime();
     }
 
     public static Date cleanTime(Date date) {
@@ -151,6 +227,7 @@ public class CalendarUtils {
         calendar.set(Calendar.YEAR, 0);
         calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.DAY_OF_MONTH, 0);
+        calendar.getTime();
     }
 
     public static Date cleanDate(Date date) {
@@ -187,11 +264,52 @@ public class CalendarUtils {
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
         calendar.set(Calendar.MILLISECOND, 999);
+        calendar.getTime();
     }
 
     public static Date lastMoment(Date date) {
         Calendar calendar = date2Calendar(date);
         lastMoment(calendar);
+        return calendar2Date(calendar);
+    }
+
+    /**
+     * 获取指定日期所在月份的第一天
+     *
+     * @param calendar -
+     */
+    public static void firstDayForSpecifiedMonth(Calendar calendar) {
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.getTime();
+    }
+
+    public static Date firstDayForSpecifiedMonth(Date date) {
+        Calendar calendar = date2Calendar(date);
+        firstDayForSpecifiedMonth(calendar);
+        return calendar2Date(calendar);
+    }
+
+    /**
+     * 获取指定日期所在月份的最后一天
+     *
+     * @param calendar -
+     */
+    public static void lastDayForSpecifiedMonth(Calendar calendar) {
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        calendar.getTime();
+    }
+
+    public static Date lastDayForSpecifiedMonth(Date date) {
+        Calendar calendar = date2Calendar(date);
+        lastDayForSpecifiedMonth(calendar);
         return calendar2Date(calendar);
     }
 
@@ -214,5 +332,11 @@ public class CalendarUtils {
     }
 
     private CalendarUtils() {
+    }
+
+    public static void main(String[] args) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MONTH, 9);
+        int num = getNumberOfTheDaysForSpecifiedMonthExcludeWeekend(calendar.getTime());
     }
 }
