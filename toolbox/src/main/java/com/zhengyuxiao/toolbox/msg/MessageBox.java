@@ -8,7 +8,9 @@ package com.zhengyuxiao.toolbox.msg;
  */
 
 public class MessageBox<T> extends Message {
-    private T data;
+    protected T data;
+
+    /*Constructor*/
 
     public MessageBox() {
         super();
@@ -29,13 +31,18 @@ public class MessageBox<T> extends Message {
         this.data = data;
     }
 
+    /*Setter And Getter*/
+
     public T getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public MessageBox<T> setData(T data) {
         this.data = data;
+        return this;
     }
+
+    /*Static method*/
 
     /**
      * @return - { "status":1,"message":"成功","ok":true,"data":xxx}

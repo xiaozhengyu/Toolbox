@@ -1,13 +1,10 @@
 package com.zhengyuxiao.toolbox.msg;
 
-import lombok.Data;
-
 /**
  * @author xzy
  * @date 2020-10-26 09:59
  * 说明：{ "status":xxx,"message":"xxx","ok":xxx}
  */
-@Data
 public class Message {
 
     public static final int STATUS_OK = 1;
@@ -22,6 +19,8 @@ public class Message {
     protected int status;
     protected String message;
     protected boolean ok;
+
+    /*Constructor*/
 
     public Message() {
         this.status = STATUS_OK;
@@ -41,6 +40,37 @@ public class Message {
         this.message = ok ? MESSAGE_OK : MESSAGE_FAIL;
     }
 
+    /*Setter And Getter*/
+
+    public Message setStatus(int status) {
+        this.status = status;
+        return this;
+    }
+
+    public Message setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public Message setOk(boolean ok) {
+        this.ok = ok;
+        return this;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public boolean getOk() {
+        return ok;
+    }
+
+    /*Analyzer*/
+
     public boolean isOk() {
         return ok;
     }
@@ -48,6 +78,8 @@ public class Message {
     public boolean isFail() {
         return !ok;
     }
+
+    /*Converter*/
 
     public void toOk() {
         this.status = STATUS_OK;
@@ -60,6 +92,8 @@ public class Message {
         this.message = MESSAGE_FAIL;
         this.ok = BOOLEAN_FAIL;
     }
+
+    /*Static method*/
 
     /**
      * @param message - 成功提示信息
