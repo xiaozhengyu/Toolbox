@@ -107,6 +107,36 @@ public class CalendarUtils {
     }
 
     /**
+     * Get number of the days before specified date exclude weekend.
+     *
+     * @param calendar -
+     * @return - number of the days before specified date exclude weekend.
+     */
+    public static int getNumberOfTheDaysBeforeSpecifiedDateExcludeWeekend(Calendar calendar) {
+        int numberOfTheDaysBeforeSpecifiedDateExcludeWeekend = 0;
+        Calendar firstDayForThisMonth = (Calendar) calendar.clone();
+        firstDayForSpecifiedMonth(firstDayForThisMonth);
+        while (firstDayForThisMonth.compareTo(calendar) <= 0) {
+            if (!isWeekend(firstDayForThisMonth)) {
+                numberOfTheDaysBeforeSpecifiedDateExcludeWeekend++;
+            }
+            firstDayForThisMonth.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        return numberOfTheDaysBeforeSpecifiedDateExcludeWeekend;
+    }
+
+    /**
+     * Get number of the days before specified date exclude weekend.
+     *
+     * @param date -
+     * @return - number of the days before specified date exclude weekend.
+     */
+    public static int getNumberOfTheDaysBeforeSpecifiedDateExcludeWeekend(Date date) {
+        return getNumberOfTheDaysBeforeSpecifiedDateExcludeWeekend(date2Calendar(date));
+    }
+
+    /**
      * 计算两个日期间相差的天数。
      *
      * @param date1 - 日期1
@@ -336,7 +366,7 @@ public class CalendarUtils {
 
     public static void main(String[] args) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.MONTH, 9);
-        int num = getNumberOfTheDaysForSpecifiedMonthExcludeWeekend(calendar.getTime());
+        // calendar.set(Calendar.MONTH, 9);
+        int num = getNumberOfTheDaysBeforeSpecifiedDateExcludeWeekend(calendar);
     }
 }
