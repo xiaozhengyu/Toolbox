@@ -68,7 +68,7 @@ public class PageFactory {
         }
 
         Sort sort = getSort(direction, columnName);
-        return sort == null ? PageRequest.of(pageNumber, pageSize) : PageRequest.of(pageNumber, pageSize, sort);
+        return PageRequest.of(pageNumber, pageSize, sort);
     }
 
     /**
@@ -101,6 +101,29 @@ public class PageFactory {
 
     public static Pageable getPageable(Page page, Sort defaultSort) {
         return getPageable(page.getPageNumber(), page.getPageSize(), page.getSortDirection(), page.getSortColumn(), defaultSort);
+    }
+
+    /**
+     * @param pageNumber        - 页码
+     * @param pageNumberDefault -
+     * @param pageSize          - 页数据量
+     * @param pageSizeDefault   -
+     * @param direction         - 排序方向
+     * @param directionDefault  -
+     * @param columnName        - 排序字段
+     * @param columnNameDefault -
+     * @return -
+     */
+    public static Pageable getPageable(Integer pageNumber, Integer pageNumberDefault,
+                                       Integer pageSize, Integer pageSizeDefault,
+                                       String direction, String directionDefault,
+                                       String columnName, String columnNameDefault) {
+
+        String dr = isNotNullAndEmpty(direction) ? direction : directionDefault;
+        String cn = isNotNullAndEmpty(columnName) ? columnName : columnNameDefault;
+        Integer pn = (pageNumber != null && pageNumber.compareTo(0) >= 0) ? pageNumber : pageNumberDefault;
+        Integer ps = (pageSize != null && pageSize.compareTo(0) > 0) ? pageSize : pageSizeDefault;
+        return getPageable(pn, ps, dr, cn);
     }
 
     /**
@@ -164,5 +187,9 @@ public class PageFactory {
         public boolean sortCriteriaNotSet() {
             return sortColumn == null || "".equals(sortColumn);
         }
+    }
+
+    public static boolean isNotNullAndEmpty(String s) {
+        return !(s == null || "".equals(s));
     }
 }
