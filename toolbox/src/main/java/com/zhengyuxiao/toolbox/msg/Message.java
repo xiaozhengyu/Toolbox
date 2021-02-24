@@ -34,6 +34,12 @@ public class Message {
         this.ok = ok;
     }
 
+    public Message(String message, boolean ok) {
+        this.status = ok ? STATUS_OK : STATUS_FAIL;
+        this.ok = ok;
+        this.message = message;
+    }
+
     public Message(boolean ok) {
         this.ok = ok;
         this.status = ok ? STATUS_OK : STATUS_FAIL;

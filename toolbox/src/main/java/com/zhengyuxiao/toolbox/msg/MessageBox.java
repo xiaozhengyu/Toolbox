@@ -26,6 +26,11 @@ public class MessageBox<T> extends Message {
         this.data = data;
     }
 
+    public MessageBox(String message, boolean ok, T data) {
+        super(message, ok);
+        this.data = data;
+    }
+
     public MessageBox(int status, String message, boolean ok, T data) {
         super(status, message, ok);
         this.data = data;
@@ -51,11 +56,19 @@ public class MessageBox<T> extends Message {
         return new MessageBox<>(BOOLEAN_OK, data);
     }
 
+    public static <E> MessageBox<E> ok(String message, E data) {
+        return new MessageBox<>(message, BOOLEAN_OK, data);
+    }
+
     /**
      * @return - { "status":0,"message":"失败","ok":false,"data":xxx}
      */
     public static <E> MessageBox<E> fail(E data) {
         return new MessageBox<>(BOOLEAN_FAIL, data);
+    }
+
+    public static <E> MessageBox<E> fail(String message, E data) {
+        return new MessageBox<>(message, BOOLEAN_FAIL, data);
     }
 
     @Override

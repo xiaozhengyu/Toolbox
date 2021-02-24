@@ -1,6 +1,8 @@
 package com.zhengyuxiao.toolbox.date;
 
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author xzy
@@ -379,9 +381,10 @@ public class CalendarUtils {
     private CalendarUtils() {
     }
 
-    public static void main(String[] args) {
-        Calendar calendar = Calendar.getInstance();
-        // calendar.set(Calendar.MONTH, 9);
-        int num = getNumberOfTheDaysBeforeSpecifiedDateExcludeWeekend(calendar);
+    public static void main(String[] args) throws Exception{
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = dateFormat.parse("2021-01-01");
+        Date date2 = dateFormat.parse("2021-01-03");
+        System.out.println(getDaysOfDifference(date2,date1));
     }
 }
